@@ -27,6 +27,26 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $age = 19;
+
+        if ($age <= 12) {
+            echo "Child";
+        }
+        else if($age <=19) {
+            echo "Teenager";
+        }
+
+        else if($age <=64) {
+            echo "Adult";
+        }
+
+        else {
+            echo "Senior";
+        }
+
+
+
         ?>
     </div>
 
@@ -43,6 +63,37 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $day = 2;
+
+        switch ($day) {
+            case 1:
+                echo "Weekday - Monday";
+                break;
+            case 2:
+                echo "Weekday - Tuesday";
+                break;
+            case 3:
+                echo "Weekday - Wednsday";
+                break;
+            case 4:
+                echo "Weekday - Thursday";
+                break;
+            case 5:
+                echo "Weekday - Friday";
+                break;
+            case 6:
+                echo "Weekend - Saturday";
+                break;
+            case 7:
+                echo "Weekend - Sunday";
+                break;
+        }
+
+
+
+
+
         ?>
     </div>
 
@@ -58,6 +109,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+
+        $num = rand(0,10);
+
+        for($i = 1; $i <= 10; $i++) {
+            $total = $num*$i;
+            echo $num, "X", $i, "=", $total, "<br>";
+        }
+
         ?>
     </div>
 
@@ -73,6 +133,21 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $num = 10;
+        $count = 0;
+
+        while($num >= 0) {
+            echo $num, "<br>";
+            $num = $num - 1;
+            $count =  $count + 1;
+            if($count == 11) {
+                echo "Blast Off!";
+            }
+        }
+
+
+
         ?>
     </div>
 

@@ -71,7 +71,7 @@
 
         $discount = $total*0.9; //applying 10% discount
 
-        echo "€$discount"
+        echo "Final Price with 10% Discount is €$discount"
 
         ?>
     </div>
