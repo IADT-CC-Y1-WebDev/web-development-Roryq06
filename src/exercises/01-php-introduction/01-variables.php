@@ -53,6 +53,26 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+
+        $milk = 2; //price variables
+        $bread = 3;
+        $eggs = 4;
+
+        $milkQ = 5; //quantities
+        $breadQ = 5;
+        $eggsQ = 5;
+
+        $milkSub = $milk*$milkQ; //subtotal (price * quantities)
+        $breadSub = $bread*$breadQ;
+        $eggsSub = $eggs*$eggsQ;
+
+        $total = $milkSub+$breadSub+$eggsSub; //Total of all the subtotals
+
+        $discount = $total*0.9; //applying 10% discount
+
+        echo "€$discount"
+
         ?>
     </div>
 
@@ -68,6 +88,16 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $isStudent = True;
+        $hasDiscount = False;
+        $isPremiumMember = True;
+
+        echo $isStudent ? "Yes" : "No";
+        echo $hasDiscount ? "Yes" : "No";
+        echo $isPremiumMember ? "Yes" : "No";
+
+
         ?>
     </div>
 
