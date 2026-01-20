@@ -115,7 +115,7 @@
 
         for($i = 1; $i <= 10; $i++) {
             $total = $num*$i;
-            echo $num, "X", $i, "=", $total, "<br>";
+            echo $num, " X ", $i, " = ", $total, "<br>";
         }
 
         ?>

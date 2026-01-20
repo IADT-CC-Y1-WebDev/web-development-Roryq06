@@ -27,6 +27,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $movies = ["The Matrix", "Inception", "Avatar", "Titanic", "21"];
+
+        for($i = 0; $i < count($movies); $i++) {
+            echo "Movie", $i+1, ": ", $movies[$i], "<br>";
+        }
+
         ?>
     </div>
 
@@ -42,6 +49,17 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $student = [
+            "name" => "Rory",
+            "studentId" => "n00255243",
+            "course" => "Creative Computing",
+            "grade" => "A+"];
+
+        $text = "{$student['name']}  is the Students Name. <br> His ID Number is {$student['studentId']}. <br> He studies {$student['course']}. <br>and got an {$student['grade']} grade.";
+
+        print("<p>$text</p>")
+
         ?>
     </div>
 
@@ -58,6 +76,19 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $fcountries = [
+            "France" => "Paris",
+            "Spain" => "Madrid",
+            "England" => "London",
+            "Scotland" => "Glasgow",
+            "Ireland" => "Dublin"
+        ];
+
+        foreach($fcountries as $countries => $capitals) {
+            echo "$capitals is the capital of $countries <br>";
+        }
+
         ?>
     </div>
 
@@ -75,6 +106,28 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $menu = [
+            'starters' => [
+                "Chicken Wing" => 8,
+                "Soup" => 5,
+                "Mozzarella Sticks" => 7
+            ],
+            'Main Course' => [
+                "Pizza" => 10,
+                "Burger" => 12,
+                "Steak" => 20
+            ]
+            ];
+
+
+            foreach($menu as $dishes => $items) {
+                echo "<b><p>" . ucfirst($dishes) . "</p></b>";
+                foreach ($items as $key => $value) {
+                    echo "$key: €$value <br>";
+                }
+            }
+
         ?>
     </div>
 
