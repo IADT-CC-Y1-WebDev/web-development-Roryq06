@@ -24,19 +24,29 @@ $errors = [];
 // Start the session
 startSession();
 
+dd($_FILES, true)
+
 try {
     // =========================================================================
     // STEP 1: View Posted Data
     // See: /examples/04-php-forms/step-01-form-submission/
     // =========================================================================
     // TODO: First, just dump the posted data to see what's submitted
-
+// dd($_POST);
 
     // =========================================================================
     // STEP 2: Check Request Method
     // See: /examples/04-php-forms/step-02-request-method/
     // =========================================================================
     // TODO: Check that the request method is POST
+
+    // Step 2: Check request method - only accept POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request method.');
+    }
+
+    // If we get here, we have a valid POST request
+    dd($_POST);
 
 
     // =========================================================================
@@ -52,6 +62,35 @@ try {
     // 'format_ids' => $_POST['format_ids'] ?? []
 
 
+    /**
+
+ * Form Fields (from books.sql):
+ * - title (required, text, 3-255 characters)
+ * - author (required, text, 3-255 characters)
+ * - publisher_id (required, integer)
+ * - year (required, integer, four digits, 1900-2026)
+ * - isbn (required, text, 13 characters)
+ * - description (required, text)
+ * - cover (required, file upload, image only, max 2MB)
+ * - format_ids (required, array of integer)
+ */
+
+        $data = [
+            'title' => $_POST['title'] ?? null,
+            'author' => $_POST['price'] ?? null,
+            'publisher_id' => $_POST['publisher_id'] ?? null,
+            'year' => $_POST['year'] ?? null,
+            'isbn' => $_POST['isbn'] ?? null,
+            'cover' => $_POST['cover'] ?? null,
+            'format_ids' => $_POST['format_ids'] ?? [],
+            'description' => $_POST['description'] ?? null,
+            'cover' => $_FILES['cover'] ?? []
+        ];
+
+        // Now we can work with $data instead of $_POST
+        dd($data);
+
+
     // =========================================================================
     // STEP 4: Validate Data
     // See: /examples/04-php-forms/step-04-validation/
@@ -61,6 +100,39 @@ try {
     // Create validator and check if validation fails; if so, store the first 
     // error for each field in the $errors array and throw an exception
 
+
+    $year =date("Y")
+    $rules = [
+        'title' => 'required|notempty|min:1|max:255',
+        'price' => 'required|float|minvalue:0',
+        'publisher_id' => 'required|notempty|min:10|max:1000'
+        'year' => 'required|notempty|minvalue:1900|max:' . $year
+        'isbn' => 'required|float|minvalue:0',
+        'description' => 'required|notempty|min:10|max:1000'
+        'cover' => 'required|notempty|min:1|max:255',
+        'format_ids' => 'required|float|minvalue:0',
+        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+
+    ];
+
+    // Create validator and check for failures
+    $validator = new Validator($data, $rules);
+
+    if ($validator->fails()) {
+        // Get all validation errors and terminate
+        echo "<h2>Validation Errors:</h2>";
+        dd($validator->errors(), true);
+    }
+
+
+    $uploader = new ImageUpload();
+    $imageFilename = $uploader->process($_FILES['image']);
+
+
+    // If we get here, validation passed
+    echo "<h2>Validation Passed!</h2>";
+    dd($data);
+}
 
     // =========================================================================
     // STEP 9: File Uploads
@@ -93,7 +165,7 @@ try {
     // =========================================================================
     // TODO: On successful registration, set a success flash message and 
     // redirect back to the form
-}
+
 catch (Exception $e) {
     // =========================================================================
     // STEP 5: Store Errors and Redirect
@@ -101,7 +173,7 @@ catch (Exception $e) {
     // =========================================================================
     // TODO: In the catch block, store validation errors in the session
     // TODO: Redirect back to the form
-
+    echo "Error: " . $e->getMessage();
 
     // =========================================================================
     // STEP 6: Store Form Data for Repopulation
