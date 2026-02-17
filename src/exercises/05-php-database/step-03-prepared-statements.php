@@ -44,6 +44,19 @@ catch (PDOException $e) {
             // 1. Prepare: SELECT * FROM books WHERE id = :id
             // 2. Execute with ['id' => 1]
             // 3. Fetch and display result
+
+            $id = 1;
+            // Prepare the statement with a named parameter
+            $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
+            // Execute with an associative array of values
+            $stmt->execute(['id' => $id]);
+            // Fetch the result
+            $book = $stmt->fetch();
+            if ($book) {
+            echo "Found: " . $book['title'];
+            } else {
+            echo "Book not found";
+            } 
             ?>
         </div>
 
@@ -63,6 +76,16 @@ catch (PDOException $e) {
             // 1. Prepare: SELECT * FROM books WHERE author LIKE :search
             // 2. Execute with ['search' => '%George%']
             // 3. Loop through and display results
+
+            $author = "george";
+            $stmt = $db->prepare("SELECT * FROM books WHERE author LIKE :author");
+            $stmt->execute(['author' => $author . "%"]);
+            $book = $stmt->fetch();
+            if ($book) {
+            echo "Found: " . $book['title'];
+            } else {
+            echo "Book not found";
+            }
             ?>
         </div>
     </div>
