@@ -56,6 +56,8 @@ catch (PDOException $e) {
             // 3. Check rowCount() === 1
             // 4. Get lastInsertId()
             // 5. Display success message with the new ID
+
+            
             ?>
         </div>
     </div>
