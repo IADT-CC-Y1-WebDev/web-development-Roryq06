@@ -1,6 +1,6 @@
 <?php
-
-class Game {
+ 
+class Book {
     public $id;
     public $title;
     public $author;
@@ -9,12 +9,12 @@ class Game {
     public $isbn;
     public $description;
     public $cover_filename;
-
+ 
     private $db;
-
-     public function __construct($data = []) {
+ 
+    public function __construct($data = []) {
         $this->db = DB::getInstance()->getConnection();
-
+ 
         if (!empty($data)) {
             $this->id = $data['id'] ?? null;
             $this->title = $data['title'] ?? null;
@@ -26,37 +26,69 @@ class Game {
             $this->cover_filename = $data['cover_filename'] ?? null;
         }
     }
-
-// Find all games
+ 
+    // Find all games
     public static function findAll() {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books ORDER BY title");
         $stmt->execute();
-
-        $games = [];
+ 
+        $books = [];
         while ($row = $stmt->fetch()) {
-            $games[] = new book($row);
+            $books[] = new Book($row);
         }
-
-        return $games;
+ 
+        return $books;
     }
-
-
+ 
     // Find game by ID
     public static function findById($id) {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
-
+ 
         $row = $stmt->fetch();
         if ($row) {
             return new Book($row);
         }
-
+ 
         return null;
     }
-
-  
+ 
+    // Find games by genre
+    public static function findByYear($year) {
+        $db = DB::getInstance()->getConnection();
+        $stmt = $db->prepare("SELECT * FROM books WHERE year = :year ORDER BY title");
+        $stmt->execute(['year' => $year]);
+ 
+        $books = [];
+        while ($row = $stmt->fetch()) {
+            $books[] = new Book($row);
+        }
+ 
+        return $books;
+    }
+ 
+    // Find games by platform (requires JOIN with GamePlatforms table)
+    public static function findByAuthor($Authorid) {
+        $db = DB::getInstance()->getConnection();
+        $stmt = $db->prepare("
+            SELECT g.*
+            FROM books g
+            INNER JOIN author gp ON g.id = gp.book_id
+            WHERE gp.author = :author
+            ORDER BY g.title
+        ");
+        $stmt->execute(['author' => $platformId]);
+ 
+        $books = [];
+        while ($row = $stmt->fetch()) {
+            $books[] = new Book($row);
+        }
+ 
+        return $books;
+    }
+ 
     // Save (insert or update)
     public function save() {
         if ($this->id) {
@@ -72,48 +104,82 @@ class Game {
                     cover_filename = :cover_filename
                 WHERE id = :id
             ");
-
+ 
             $params = [
                 'title' => $this->title,
                 'author' => $this->author,
                 'publisher_id' => $this->publisher_id,
-                'description' => $this->description,
                 'year' => $this->year,
                 'isbn' => $this->isbn,
+                'description' => $this->description,
                 'cover_filename' => $this->cover_filename,
                 'id' => $this->id
             ];
-        } 
+        }
         else {
             // Insert new record
             $stmt = $this->db->prepare("
-                INSERT INTO games (title, author, publisher_id, year, isbn, description, cover_filename)
+                INSERT INTO books (title, author, publisher_id, year, isbn, description, cover_filename)
                 VALUES (:title, :author, :publisher_id, :year, :isbn, :description, :cover_filename)
             ");
-
+ 
             $params = [
-                'title' => $this->title,
-                'author' => $this->author,
-                'publisher_id' => $this->publisher_id,
-                'year' => $this->year,
-                'isbn' => $this->isbn,
-                'description' => $this->description,
-                'cover_filename' => $this->cover_filename
+            'title' => $this->title,
+            'author' => $this->author,
+            'publisher_id' => $this->publisher_id,
+            'year' => $this->year,
+            'isbn'=> $this->description,
+            'description' => $this->description,
+            'cover_filename' => $this->image_filename
             ];
         }
-
-     
+        // Execute statement
+        $status = $stmt->execute($params);
+ 
+        // Check for errors
+        if (!$status) {
+            $error_info = $stmt->errorInfo();
+            $message = sprintf(
+                "SQLSTATE error code: %d; error message: %s",
+                $error_info[0],
+                $error_info[2]
+            );
+            throw new Exception($message);  
+        }
+ 
+        // Ensure one row affected
+        if ($stmt->rowCount() !== 1) {
+            throw new Exception("Failed to save book.");
+        }
+ 
+        // Set ID for new records
+        if ($this->id === null) {
+            $this->id = $this->db->lastInsertId();
+        }
+    }
+ 
     // Delete
     public function delete() {
         if (!$this->id) {
             return false;
         }
-
+ 
         $stmt = $this->db->prepare("DELETE FROM books WHERE id = :id");
         return $stmt->execute(['id' => $this->id]);
     }
-
-
+ 
+    // Convert to array for JSON output
+    public function toArray() {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'author' => $this->author,
+            'publisher_id' => $this->publisher_id,
+            'year' => $this->year,
+            'isbn'=> $this->description,
+            'description' => $this->description,
+            'cover_filename' => $this->image_filename
+        ];
+    }
 }
-}
-
+ 
