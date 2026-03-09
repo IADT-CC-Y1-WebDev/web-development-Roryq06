@@ -15,8 +15,8 @@ try {
     }
     $id = $_GET['id'];
 
-    $game = Game::findById($id);
-    if ($game === null) {
+    $book = Book::findById($id);
+    if ($book === null) {
         throw new Exception("Game not found.");
     }
 
@@ -25,6 +25,7 @@ try {
     foreach ($gamePlatforms as $platform) {
         $gamePlatformsIds[] = $platform->id;
     }
+
 
     $genres = Genre::findAll();
     $platforms = Platform::findAll();
