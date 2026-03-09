@@ -50,21 +50,21 @@ catch (PDOException $e) {
                 <h1>Edit Game</h1>
             </div>
             <div class="width-12">
-                <form action="game_update.php" method="POST" enctype="multipart/form-data">
+                <form action="book_update.php" method="POST" enctype="multipart/form-data">
                     <div class="input">
-                        <input type="hidden" name="id" value="<?= h($game->id) ?>">
+                        <input type="hidden" name="id" value="<?= h($book->id) ?>">
                     </div>
                     <div class="input">
                         <label class="special" for="title">Title:</label>
                         <div>
-                            <input type="text" id="title" name="title" value="<?= old('title', $game->title) ?>" required>
+                            <input type="text" id="title" name="title" value="<?= old('title', $book->title) ?>" required>
                             <p><?= error('title') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="release_date">Release Year:</label>
                         <div>
-                            <input type="date" id="release_date" name="release_date" value="<?= old('release_date', $game->release_date) ?>" required>
+                            <input type="date" id="release_date" name="release_date" value="<?= old('release_date', $book->release_date) ?>" required>
                             <p><?= error('release_date') ?></p>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ catch (PDOException $e) {
                     <div class="input">
                         <label class="special" for="description">Description:</label>
                         <div>
-                            <textarea id="description" name="description" required><?= old('description', $game->description) ?></textarea>
+                            <textarea id="description" name="description" required><?= old('description', $book->description) ?></textarea>
                             <p><?= error('description') ?></p>
                         </div>
                     </div>

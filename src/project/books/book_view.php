@@ -42,7 +42,7 @@ catch (PDOException $e) {
             <div class="width-12">
                 <div class="hCard">
                     <div class="bottom-content">
-                        <img src="covers/<?= htmlspecialchars($book->cover_filename) ?>" />
+                        <img src="images/<?= htmlspecialchars($book->cover_filename) ?>" />
  
                         <div class="actions">
                             <a href="book_edit.php?id=<?= h($book->id) ?>">Edit</a> /
