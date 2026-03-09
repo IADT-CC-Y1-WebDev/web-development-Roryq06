@@ -18,7 +18,7 @@ try {
  
     $formatNames = [];
     foreach ($format as $format) {
-        $formatNames[] = htmlspecialchars($format->name);
+        $formatNames[] = htmlspecialchars($format->name ?? '');
     }
 }
 catch (PDOException $e) {
