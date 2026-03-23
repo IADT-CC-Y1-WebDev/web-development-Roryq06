@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encapsulation Exercises - PHP Classes &amp; Objects</title>
     <link rel="stylesheet" href="/exercises/css/style.css">
 </head>
+
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
@@ -36,9 +38,14 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once __DIR__ . '/classes/student.php';
+        require_once 'classes/student.php';
 
-        
+        $student = new Student("Rory", "12345");
+
+        // Using getters (works ✅)
+        echo "<p>Student " . $student->getName() . " has number " . $student->getNumber() . "</p>";
+
+
         ?>
     </div>
 
@@ -60,6 +67,12 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once 'classes/student.php';
+
+        $student = new Student("Rory", "12345");
+
+        echo "<p>Student " . $student->getName() . " has number " . $student->getNumber() . "</p>";
         ?>
     </div>
 
@@ -86,8 +99,20 @@
         // } catch (Exception $e) {
         //     echo "Error: " . $e->getMessage();
         // }
+
+        require_once 'classes/student.php';
+
+        try {
+            // Try creating student with EMPTY number
+            $student = new Student("Rory", "");
+
+            echo "<p>Student created successfully</p>";
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+        }
         ?>
     </div>
 
 </body>
+
 </html>

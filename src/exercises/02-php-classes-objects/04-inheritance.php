@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inheritance Exercises - PHP Classes &amp; Objects</title>
     <link rel="stylesheet" href="/exercises/css/style.css">
 </head>
+
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
@@ -38,6 +40,12 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Undergrad.php';
+        require_once __DIR__ . '/classes/Undergrad.php';
+
+        $student = new Undergrad("Rory", "12345", "Computer Science", 1);
+
+
+        echo "<p>Name: " . $student->getName() . "</p>";
         ?>
     </div>
 
@@ -59,6 +67,16 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Undergrad.php';
+
+        require_once __DIR__ . '/classes/Undergrad.php';
+
+        $student = new Undergrad("Rory", "12345", "Computer Science", 1);
+
+        // Display all info
+        echo "<p>Name: " . $student->getName() . "</p>";
+        echo "<p>Number: " . $student->getNumber() . "</p>";
+        echo "<p>Course: " . $student->getCourse() . "</p>";
+        echo "<p>Year: " . $student->getYear() . "</p>";
         ?>
     </div>
 
@@ -80,4 +98,5 @@
     </div>
 
 </body>
+
 </html>

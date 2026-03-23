@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Methods Exercises - PHP Classes &amp; Objects</title>
     <link rel="stylesheet" href="/exercises/css/style.css">
 </head>
+
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
@@ -33,6 +35,11 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once 'classes/student.php';
+
+        $student1 = new Student("Rory", "12345");
+        $student2 = new Student("Alex", "67890");
         ?>
     </div>
 
@@ -53,6 +60,12 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once 'classes/student.php';
+
+        $student = new Student("Rory", "12345");
+
+        echo "<p>$student</p>";
         ?>
     </div>
 
@@ -74,6 +87,21 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once 'classes/student.php';
+
+
+        $students = [
+            new Student("Rory", "12345"),
+            new Student("Alex", "67890"),
+            new Student("Jamie", "54321")
+        ];
+
+
+        foreach ($students as $student) {
+            echo $student . "<br>";
+        }
+
         ?>
     </div>
 
@@ -100,8 +128,19 @@
         // echo "Setting student1 to null...<br>";
         // $student1 = null;
         // echo "Script ending...<br>";
+
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student1 = new Student("Alice", "S001");
+        $student2 = new Student("Bob", "S002");
+
+        echo "Setting student1 to null...<br>";
+        $student1 = null;
+
+        echo "Script ending...<br>";
         ?>
     </div>
 
 </body>
+
 </html>

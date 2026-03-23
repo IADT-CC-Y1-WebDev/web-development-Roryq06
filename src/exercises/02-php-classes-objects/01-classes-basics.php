@@ -40,18 +40,18 @@
 
 
 
-        require_once 'classes/student.php';
+        // require_once 'classes/student.php';
 
-        
-        $student = new Student();
 
-        
-        $student->name = "Rory";
-        $student->number = "12345";
+        // $student = new Student("Rory", "12345");
 
-       
-        echo "<p>Name: " . $student->name . "</p>";
-        echo "<p>Number: " . $student->number . "</p>";
+
+        // $student->name = "Rory";
+        // $student->number = "12345";
+
+
+        // echo "<p>Name: " . $student->name . "</p>";
+        // echo "<p>Number: " . $student->number . "</p>";
 
         ?>
 
@@ -75,17 +75,15 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once 'classes/student.php';
+        // require_once 'classes/student.php';
 
-        $account = new Student("Rory", 18);
+        // // Create students using constructor
+        // $student1 = new Student("Rory", "12345");
+        // $student2 = new Student("Alex", "67890");
 
-        echo "Name: ", $account->name, "<br>";
-        echo "Number: ", $account->number, "<br>";
-
-        $account = new Student("Jack", 19);
-
-        echo "Name: ", $account->name, "<br>";
-        echo "Number: ", $account->number;
+        // // Display details
+        // echo "<p>Name: " . $student1->name . " | Number: " . $student1->number . "</p>";
+        // echo "<p>Name: " . $student2->name . " | Number: " . $student2->number . "</p>";
 
 
 
@@ -112,10 +110,10 @@
 
         require_once 'classes/student.php';
 
-        $account = new Student("Rory", 18);
+        $student = new Student("Rory", "12345");
 
-        echo "Student " . $account->getName() . " has number " . $account->getNumber();
-
+        echo "<p>Student " . $student->getName() .
+            " has number " . $student->getNumber() . "</p>";
         ?>
     </div>
 
