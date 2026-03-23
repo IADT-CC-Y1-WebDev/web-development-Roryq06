@@ -10,121 +10,127 @@ try {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         throw new Exception('Invalid request method.');
     }
-    if (!array_key_exists('id', $_GET)) {
-        throw new Exception('No game ID provided.');
+
+    if (!isset($_GET['id'])) {
+        throw new Exception('No book ID provided.');
     }
+
     $id = $_GET['id'];
 
     $book = Book::findById($id);
-    if ($book === null) {
-        throw new Exception("Game not found.");
+    if (!$book) {
+        throw new Exception('Book not found.');
     }
 
-    $gamePlatforms = Platform::findByGame($game->id);
-    $gamePlatformsIds = [];
-    foreach ($gamePlatforms as $platform) {
-        $gamePlatformsIds[] = $platform->id;
-    }
+    $publishers = Publisher::findAll();
 
-
-    $genres = Genre::findAll();
-    $platforms = Platform::findAll();
-}
-catch (PDOException $e) {
-    setFlashMessage('error', 'Error: ' . $e->getMessage());
-    redirect('/index.php');
+} catch (Exception $e) {
+    setFlashMessage('error', $e->getMessage());
+    redirect('index.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <?php include 'php/inc/head_content.php'; ?>
-        <title>Edit Game</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="width-12">
-                <?php require 'php/inc/flash_message.php'; ?>
+<head>
+    <?php include 'php/inc/head_content.php'; ?>
+    <title>Edit Book</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="width-12">
+        <?php require 'php/inc/flash_message.php'; ?>
+    </div>
+
+    <div class="width-12">
+        <h1>Edit Book</h1>
+    </div>
+
+    <div class="width-12">
+        <form action="book_update.php" method="POST" enctype="multipart/form-data">
+
+            <!-- Hidden ID -->
+            <input type="hidden" name="id" value="<?= h($book->id) ?>">
+
+            <!-- Title -->
+            <div class="input">
+                <label class="special">Title:</label>
+                <input type="text" name="title" value="<?= old('title', $book->title) ?>" required>
+                <p><?= error('title') ?></p>
             </div>
-            <div class="width-12">
-                <h1>Edit Game</h1>
+
+            <!-- Author -->
+            <div class="input">
+                <label class="special">Author:</label>
+                <input type="text" name="author" value="<?= old('author', $book->author) ?>" required>
+                <p><?= error('author') ?></p>
             </div>
-            <div class="width-12">
-                <form action="book_update.php" method="POST" enctype="multipart/form-data">
-                    <div class="input">
-                        <input type="hidden" name="id" value="<?= h($book->id) ?>">
-                    </div>
-                    <div class="input">
-                        <label class="special" for="title">Title:</label>
-                        <div>
-                            <input type="text" id="title" name="title" value="<?= old('title', $book->title) ?>" required>
-                            <p><?= error('title') ?></p>
-                        </div>
-                    </div>
-                    <div class="input">
-                        <label class="special" for="release_date">Release Year:</label>
-                        <div>
-                            <input type="date" id="release_date" name="release_date" value="<?= old('release_date', $book->release_date) ?>" required>
-                            <p><?= error('release_date') ?></p>
-                        </div>
-                    </div>
-                    <div class="input">
-                        <label class="special" for="genre_id">Genre:</label>
-                        <div>
-                            <select id="genre_id" name="genre_id" required>
-                                <?php foreach ($genres as $genre) { ?>
-                                    <option value="<?= h($genre->id) ?>" <?= chosen('genre_id', $genre->id, $game->genre_id) ? "selected" : "" ?>>
-                                        <?= h($genre->name) ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                            <p><?= error('genre_id') ?></p>
-                        </div>
-                    </div>
-                    <div class="input">
-                        <label class="special" for="description">Description:</label>
-                        <div>
-                            <textarea id="description" name="description" required><?= old('description', $book->description) ?></textarea>
-                            <p><?= error('description') ?></p>
-                        </div>
-                    </div>
-                    <div class="input">
-                        <label class="special">Platforms:</label>
-                        <div>
-                            <?php foreach ($platforms as $platform) { ?>
-                                <div>
-                                    <input type="checkbox" 
-                                        id="platform_<?= h($platform->id) ?>" 
-                                        name="platform_ids[]" 
-                                        value="<?= h($platform->id) ?>"
-                                        <?= chosen('platform_ids', $platform->id, $gamePlatformsIds) ? "checked" : "" ?>
-                                    >
-                                    <label for="platform_<?= h($platform->id) ?>"><?= h($platform->name) ?></label>
-                                </div>
-                            <?php } ?>
-                        </div>
-                        <p><?= error('platform_ids') ?></p>
-                    </div>
-                    <div><img src="images/<?= $game->image_filename ?>" /></div>
-                    <div class="input">
-                        <label class="special" for="image">Image (optional):</label>
-                        <div>
-                            <input type="file" id="image" name="image" accept="image/*">
-                            <p><?= error('image') ?></p>
-                        </div>
-                    </div>
-                    <div class="input">
-                        <button class="button" type="submit">Update Game</button>
-                        <div class="button"><a href="index.php">Cancel</a></div>
-                    </div>
-                </form>
+
+            <!-- Publisher -->
+            <div class="input">
+                <label class="special">Publisher:</label>
+                <select name="publisher_id" required>
+                    <?php foreach ($publishers as $publisher) { ?>
+                        <option value="<?= h($publisher->id) ?>"
+                            <?= chosen('publisher_id', $publisher->id, $book->publisher_id) ? "selected" : "" ?>>
+                            <?= h($publisher->name) ?>
+                        </option>
+                    <?php } ?>
+                </select>
+                <p><?= error('publisher_id') ?></p>
             </div>
-        </div>
-    </body>
+
+            <!-- Year -->
+            <div class="input">
+                <label class="special">Year:</label>
+                <input type="number" name="year" value="<?= old('year', $book->year) ?>" required>
+                <p><?= error('year') ?></p>
+            </div>
+
+            <!-- ISBN -->
+            <div class="input">
+                <label class="special">ISBN:</label>
+                <input type="text" name="isbn" value="<?= old('isbn', $book->isbn) ?>" required>
+                <p><?= error('isbn') ?></p>
+            </div>
+
+            <!-- Description -->
+            <div class="input">
+                <label class="special">Description:</label>
+                <textarea name="description" required><?= old('description', $book->description) ?></textarea>
+                <p><?= error('description') ?></p>
+            </div>
+
+            <!-- Current Image -->
+            <div class="input">
+                <label class="special">Current Image:</label><br>
+                <img src="images/<?= h($book->cover_filename) ?>" style="width:150px;">
+            </div>
+
+            <!-- New Image -->
+            <div class="input">
+                <label class="special">New Image (optional):</label>
+                <input type="file" name="cover_filename" accept="image/*">
+                <p><?= error('cover_filename') ?></p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="input">
+                <button class="button" type="submit">Update Book</button>
+                <a href="index.php" class="button">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
 </html>
+
 <?php
-// Clear form data after displaying
 clearFormData();
-// Clear errors after displaying
 clearFormErrors();
 ?>
