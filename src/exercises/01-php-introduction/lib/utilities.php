@@ -1,20 +1,18 @@
 <?php
 
-$text = "hello";
-$length = 4;
-
 function truncate($text, $length) {
-    return count($text);
+    if (strlen($text) > $length) {
+        return substr($text, 0, $length) . "...";
+    }
+    return $text;
 }
 
-function totalPrice($amount) {
-
+function formatPrice($amount) {
+    return "$" . number_format($amount, 2);
 }
 
 function getCurrentYear() {
-
+    return date("Y");
 }
-
-truncate($text, $length);
 
 ?>

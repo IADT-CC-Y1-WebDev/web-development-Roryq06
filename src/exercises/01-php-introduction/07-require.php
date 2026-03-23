@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libraries Exercises - PHP Introduction</title>
     <link rel="stylesheet" href="/exercises/css/style.css">
 </head>
+
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to PHP Introduction</a>
@@ -35,6 +37,14 @@
         <?php
         // TODO: Write your solution here
         require_once 'lib/utilities.php';
+
+        echo truncate("Hello world", 5);
+        echo "<br>";
+
+        echo formatPrice(1234.5);
+        echo "<br>";
+
+        echo getCurrentYear();
         ?>
     </div>
 
@@ -46,8 +56,24 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        require_once 'lib/validators.php';
+        require_once 'lib/formatters.php';
+        
+        $email = "test@example.com";
+        $phone = "1234567890";
+
+        // Test email
+        if (isValidEmail($email)) {
+            echo "<p>Email is valid: $email</p>";
+        } else {
+            echo "<p>Email is NOT valid</p>";
+        }
+
+        // Test phone formatting
+        echo "<p>Formatted phone: " . formatPhoneNumber($phone) . "</p>";
         ?>
     </div>
 
 </body>
+
 </html>

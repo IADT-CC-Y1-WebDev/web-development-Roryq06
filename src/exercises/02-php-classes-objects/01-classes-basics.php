@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes Basics Exercises - PHP Classes &amp; Objects</title>
     <link rel="stylesheet" href="/exercises/css/style.css">
 </head>
+
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
@@ -36,14 +38,21 @@
         // require_once __DIR__ . '/classes/Student.php';
         // Step 3: Create a student and display their details
 
-      
-        require_once 'classes/student.php'; 
-
-        $account = new Student("Dan", 15);
 
 
-        echo "Name: ", $account->name, "<br>";
-        echo "Number: ", $account->number; 
+        require_once 'classes/student.php';
+
+        
+        $student = new Student();
+
+        
+        $student->name = "Rory";
+        $student->number = "12345";
+
+       
+        echo "<p>Name: " . $student->name . "</p>";
+        echo "<p>Number: " . $student->number . "</p>";
+
         ?>
 
     </div>
@@ -71,7 +80,7 @@
         $account = new Student("Rory", 18);
 
         echo "Name: ", $account->name, "<br>";
-        echo "Number: ", $account->number,"<br>";
+        echo "Number: ", $account->number, "<br>";
 
         $account = new Student("Jack", 19);
 
@@ -102,13 +111,14 @@
         // require_once __DIR__ . '/classes/Student.php';
 
         require_once 'classes/student.php';
-        
+
         $account = new Student("Rory", 18);
 
         echo "Student " . $account->getName() . " has number " . $account->getNumber();
-        
+
         ?>
     </div>
 
 </body>
+
 </html>
