@@ -35,7 +35,7 @@ catch (PDOException $e) {
     <div class="width-12">
         <form action="book_store.php" method="POST" enctype="multipart/form-data" novalidate>
 
-            <!-- TITLE -->
+            
             <div class="input">
                 <label class="special" for="title">Title:</label>
                 <div>
@@ -44,7 +44,7 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- AUTHOR -->
+            
             <div class="input">
                 <label class="special" for="author">Author:</label>
                 <div>
@@ -53,7 +53,7 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- YEAR -->
+          
             <div class="input">
                 <label class="special" for="year">Release Year:</label>
                 <div>
@@ -62,7 +62,7 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- ISBN -->
+           
             <div class="input">
                 <label class="special" for="isbn">ISBN (13 digits):</label>
                 <div>
@@ -71,7 +71,7 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- PUBLISHER -->
+           
             <div class="input">
                 <label class="special" for="publisher_id">Publisher:</label>
                 <div>
@@ -86,7 +86,6 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- DESCRIPTION -->
             <div class="input">
                 <label class="special" for="description">Description:</label>
                 <div>
@@ -95,7 +94,7 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- FORMATS -->
+           
             <div class="input">
                 <label class="special">Formats:</label>
                 <div>
@@ -116,7 +115,7 @@ catch (PDOException $e) {
                 <p><?= error('format_ids') ?></p>
             </div>
 
-            <!-- IMAGE -->
+            
             <div class="input">
                 <label class="special" for="cover_filename">Image:</label>
                 <div>
@@ -125,7 +124,6 @@ catch (PDOException $e) {
                 </div>
             </div>
 
-            <!-- BUTTONS -->
             <div class="input">
                 <button class="button" type="submit">Store Book</button>
                 <div class="button"><a href="index.php">Cancel</a></div>
