@@ -96,7 +96,7 @@ catch (PDOException $e) {
                                         <?= chosen('format_id', $format->id) ? "checked" : "" ?>
                                         >
                                     <label for="format_id<?= h($format->id) ?>"><?= h($format->name) ?></label>
-                                </div>
+</div>
                             <?php } ?>
                         </div>
                         <p><?= error('format_id') ?></p>
