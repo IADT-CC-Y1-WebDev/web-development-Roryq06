@@ -6,6 +6,11 @@ body {
 	background-color: #fff;
 }
 
+.card.hidden {
+    display: none;
+}
+
+
 .cards {
 	display: flex;
 	gap: 40px 20px;
@@ -190,3 +195,4 @@ form {
 	color: #252525;
 	font-weight: 900;
 }
+

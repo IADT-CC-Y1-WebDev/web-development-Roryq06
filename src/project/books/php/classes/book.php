@@ -9,6 +9,7 @@ class Book {
     public $isbn;
     public $description;
     public $cover_filename;
+    // public $format_id;
  
     private $db;
  
@@ -24,6 +25,7 @@ class Book {
             $this->isbn = $data['isbn'] ?? null;
             $this->description = $data['description'] ?? null;
             $this->cover_filename = $data['cover_filename'] ?? null;
+            // $this->format_id = $data['format_id'] ?? null;
         }
     }
  
@@ -79,7 +81,7 @@ class Book {
             WHERE gp.author = :author
             ORDER BY g.title
         ");
-        $stmt->execute(['author' => $platformId]);
+        $stmt->execute(['author' => $AuthorId]);
  
         $books = [];
         while ($row = $stmt->fetch()) {
@@ -128,9 +130,9 @@ class Book {
             'author' => $this->author,
             'publisher_id' => $this->publisher_id,
             'year' => $this->year,
-            'isbn'=> $this->description,
+            'isbn'=> $this->isbn,
             'description' => $this->description,
-            'cover_filename' => $this->image_filename
+            'cover_filename' => $this->cover_filename
             ];
         }
         // Execute statement
@@ -178,7 +180,7 @@ class Book {
             'year' => $this->year,
             'isbn'=> $this->description,
             'description' => $this->description,
-            'cover_filename' => $this->image_filename
+            'cover_filename' => $this->cover_filename,
         ];
     }
 }

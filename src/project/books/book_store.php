@@ -26,7 +26,7 @@ try {
         'isbn' => $_POST['isbn'] ?? null,
         'description' => $_POST['description'] ?? null,
         'cover_filename' => $_FILES['cover_filename'] ?? null,
-        'format_id' => $_POST['format_id'] ?? []
+        // 'format_id' => $_POST['format_id'] ?? []
     ];
  
     // Define validation rules
@@ -38,7 +38,7 @@ try {
         'isbn' => 'required|notempty|min:1|max:13',
         'description' => 'required|min:1|max:1000',
         'cover_filename' => 'required|file|cover|mimes:jpg,jpeg,png|max_file_size:5242880',
-        'format_id' => 'required|array|min:1|max:10'
+        // 'format_id' => 'required|array|min:1|max:10'
     ];
  
     // Validate all data (including file)
@@ -76,7 +76,7 @@ try {
     $book->year = $data['year'];
     $book->isbn = $data['isbn'];
     $book->description = $data['description'];
-    $book->format_id = $data['format_id'];
+    // $book->format_id = $data['format_id'];
     $book->cover_filename = $coverFilename;
  
     // Save to database
