@@ -1,4 +1,3 @@
-console.log("Hello Woled")
 
 let applyBtn = document.getElementById('apply_filters');
 let clearBtn = document.getElementById('clear_filters');
