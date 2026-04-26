@@ -3,12 +3,12 @@ require_once 'php/lib/config.php';
 require_once 'php/lib/session.php';
 require_once 'php/lib/forms.php';
 require_once 'php/lib/utils.php';
- 
+
 startSession();
- 
+
 // dd($_SESSION["form-data"]);
 // dd($_SESSION["form-errors"]);
- 
+
 try {
     $publishers = Publisher::findAll();
     $formats = Format::findAll();
@@ -19,12 +19,14 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <?php include 'php/inc/head_content.php'; ?>
     <title>View Book</title>
+
+    
 </head>
- 
+
 <body>
     <div class="container">
         <div class="width-12">
@@ -39,11 +41,11 @@ try {
                 <div class="input">
                     <label class="special" for="title">Title:</label>
                     <div>
-                        <input type="text" id="title" name="title" value="<?= old('title') ?>" required >
+                        <input type="text" id="title" name="title" value="<?= old('title') ?>" required>
                         <p id="title_error"><?= error('title') ?></p>
                     </div>
                 </div>
- 
+
                 <div class="input">
                     <label class="special" for="author">Author:</label>
                     <div>
@@ -51,15 +53,15 @@ try {
                         <p id="author_error"><?= error('author') ?></p>
                     </div>
                 </div>
- 
+
                 <div class="input">
                     <label class="special" for="isbn">ISBN:</label>
                     <div>
-                        <input type="text" id="isbn" name="isbn" value="<?= old('isbn' ) ?>" required>
+                        <input type="text" id="isbn" name="isbn" value="<?= old('isbn') ?>" required>
                         <p id="isbn_error"><?= error('isbn') ?></p>
                     </div>
                 </div>
- 
+
                 <div class="input">
                     <label class="special" for="publisher_id">Publisher:</label>
                     <div>
@@ -73,7 +75,7 @@ try {
                         <p id="publisher_id_error"><?= error('publisher_id') ?></p>
                     </div>
                 </div>
- 
+
                 <div class="input">
                     <label class="special" for="year">Release Date:</label>
                     <div>
@@ -81,7 +83,7 @@ try {
                         <p id="year_error"><?= error('year') ?></p>
                     </div>
                 </div>
- 
+
                 <div class="input">
                     <label class="special" for="description">Description:</label>
                     <div>
@@ -105,20 +107,21 @@ try {
                 <div class="input">
                     <label class="special" for="cover">Image (required):</label>
                     <div>
-                        <input type="file" id="cover" name="cover" accept="image/*" required>
+                        <input type="file" id="cover" name="cover_filename" accept="image/*" required>
                         <p id="cover_error"><?= error('cover') ?></p>
                     </div>
                 </div>
                 <div class="input">
                     <button id="submit_btn" class="button" type="submit">Store Book</button>
-                    <div class="button"><a href="book_list.php">Cancel</a></div>
+                    <div class="button"><a href="index.php">Cancel</a></div>
                 </div>
             </form>
         </div>
     </div>
     <script src="js/jsvalidation.js"></script>
+    
 </body>
- 
+
 </html>
 <?php
 // Clear form data after displaying
@@ -126,4 +129,3 @@ clearFormData();
 // Clear errors after displaying
 clearFormErrors();
 ?>
- 

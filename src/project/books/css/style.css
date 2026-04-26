@@ -4,6 +4,7 @@ body {
 	font-weight: 400;
 	line-height: 1.5em;
 	background-color: #fff;
+	transition: background-color 0.3s, color 0.3s;
 }
 
 .card.hidden {
@@ -170,7 +171,7 @@ body {
 	height: 340px;
 }
 
-form {
+ form {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -180,7 +181,7 @@ form {
 .input {
 	display: flex;
 	gap: 20px;
-}
+}  
 
 .input p {
 	margin-top: 3px;
@@ -188,13 +189,13 @@ form {
 	font-size: 14px;
 }
 
-.input label.special {
+ .input label.special {
 	width: 108px;
 	display: flex;
 	justify-content: flex-end;
 	color: #252525;
 	font-weight: 900;
-}
+} 
 
 /* Top error summary box */
 #error_summary_top {
@@ -229,4 +230,74 @@ form {
 .input-error {
     border: 1px solid #cc0000;
     background-color: #fff5f5;
+}
+
+
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Cards */
+body.dark-mode .card,
+body.dark-mode .hCard {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+/* Card titles */
+body.dark-mode .card h2,
+body.dark-mode .hCard h2 {
+    color: #9b87f5;
+}
+
+/* Text */
+body.dark-mode p {
+    color: #ccc;
+}
+
+/* Links */
+body.dark-mode .actions a {
+    color: #9b87f5;
+}
+
+body.dark-mode .actions a:hover {
+    color: #c4b5fd;
+}
+
+/* Images border */
+body.dark-mode .card img,
+body.dark-mode .hCard img {
+    border-color: #444;
+}
+
+/* Filters bar */
+body.dark-mode .filters {
+    background-color: #1a1a1a;
+}
+
+/* Inputs */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* Buttons */
+body.dark-mode button,
+body.dark-mode .button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+/* Error box */
+body.dark-mode #error_summary_top {
+    background-color: #3a1a1a;
+    border-color: #ff4d4d;
+    color: #ffcccc;
 }

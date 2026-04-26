@@ -5,7 +5,9 @@ require_once 'php/lib/forms.php';
 require_once 'php/lib/utils.php';
  
 startSession();
- 
+
+
+
 try {
     // Initialize form data array
     $data = [];
