@@ -7,7 +7,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 if ($username === 'admin' && $password === 'password') {
-    $_SESSION['user_id'] = 1;
+    $_SESSION['user_id'] = true;
 
     header("Location: index.php");
     exit;

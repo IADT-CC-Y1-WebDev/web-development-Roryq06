@@ -1,7 +1,7 @@
 const toggleBtn = document.getElementById('themeToggle');
 
 function updateButton() {
-    if (!toggleBtn) return; // ✅ prevent crash
+    if (!toggleBtn) return; 
 
     if (document.body.classList.contains('dark-mode')) {
         toggleBtn.textContent = '☀️ Light Mode';
@@ -10,7 +10,6 @@ function updateButton() {
     }
 }
 
-// Only add event if button exists
 if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
