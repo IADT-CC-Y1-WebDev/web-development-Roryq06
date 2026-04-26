@@ -53,23 +53,28 @@ function cardMatches(crd, fltrs) {
     // console.log(crd.dataset.title, fltrs.titleFilter);
     let title = crd.dataset.title.toLowerCase();
     let publisher = crd.dataset.publisher;
+     let year = crd.dataset.year;
  
     let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
     let matchPublisher    = fltrs.publisherFilter    === "" || publisher === fltrs.publisherFilter;
- 
-    return matchTitle && matchPublisher;
+    let matchYear = fltrs.yearFilter === "" || year.includes(fltrs.yearFilter);
+
+    return matchTitle && matchPublisher && matchYear;
 }
  
 function getFilters() {
     const titleEl = form.elements['title_filter'];
     const publisherEl = form.elements['publisher_filter'];
+    const yearEl = form.elements['year_filter'];
  
     let titleFilter = (titleEl.value || '').trim().toLowerCase();
     let publisherFilter = publisherEl.value || '';
+    let yearFilter = (yearEl.value || '').trim();
  
     return {
         "titleFilter" : titleFilter,
         "publisherFilter" : publisherFilter,
+         "yearFilter": yearFilter,
         "sortBy" : "title_asc"
     };
 }

@@ -24,14 +24,17 @@ try {
     <div class="container">
         <div class="width-12 header">
             <?php require 'php/inc/flash_message.php'; ?>
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <a href="logout.php">Logout</a>
-            <?php } else { ?>
-                <a href="login.php">Login</a>
-            <?php } ?>
-            <button id="themeToggle">🌙 Dark Mode</button>
-            <div class="button">
-                <a href="book_create.php">Add New Book</a>
+
+            <div class="header-actions">
+                <?php if (isset($_SESSION['user_id'])) { ?>
+                    <a href="logout.php" class="link-btn">Logout</a>
+                <?php } else { ?>
+                    <a href="login.php" class="link-btn">Login</a>
+                <?php } ?>
+
+                <button id="themeToggle" class="header-btn">🌙 Dark Mode</button>
+
+                <a href="book_create.php" class="button header-btn">Add New Book</a>
             </div>
         </div>
         <?php if (!empty($books)) { ?>
@@ -55,7 +58,7 @@ try {
 
                     <div>
                         <label for="year_filter">Year:</label>
-                        <input type="number" id="year_filter" name="year_filter">
+                        <input type="text" id="year_filter" name="year_filter">
                     </div>
 
                     <div>
@@ -86,7 +89,9 @@ try {
                 <?php foreach ($books as $book) { ?>
                     <div class="card"
                         data-title="<?= h($book->title) ?>"
-                        data-publisher="<?= h($book->publisher_id) ?>">
+                        data-publisher="<?= h($book->publisher_id) ?>"
+                        data-year="<?= h($book->year) ?>">
+
 
 
                         <div class="top-content">
@@ -101,7 +106,10 @@ try {
                                 <?php if (isset($_SESSION['user_id'])) { ?>
                                     /
                                     <a href="book_edit.php?id=<?= h($book->id) ?>">Edit</a>/
-                                    <a href="book_delete.php?id=<?= h($book->id) ?>">Delete</a>
+                                    <a href="book_delete.php?id=<?= h($book->id) ?>"
+                                        onclick="return confirm('Are you sure you want to delete this book?');">
+                                        Delete
+                                    </a>
                                 <?php } ?>
                             </div>
                         </div>

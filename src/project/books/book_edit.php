@@ -127,7 +127,7 @@ try {
         </div>
 
     </div>
-    <script src="js/jsvalidation.js"></script>
+    <script src="js/edit-jsvalidation.js"></script>
 </body>
 
 </html>
